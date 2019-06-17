@@ -32,6 +32,28 @@ describe('gameReducer', function () {
                 }
             }
         },
+        {
+            config: {field: "w", newValue: 30},
+            expected: {
+                status: GameStatus.CONFIG,
+                config: {
+                    h: 8,
+                    w: 30,
+                    numBomb: 6
+                }
+            }
+        },
+        {
+            config: {field: "numBomb", newValue: 10},
+            expected: {
+                status: GameStatus.CONFIG,
+                config: {
+                    h: 8,
+                    w: 8,
+                    numBomb: 10
+                }
+            }
+        },
     ].forEach(({config, expected}) => {
         it(`should update config for field "${config.field}" to ${config.newValue}`, () => {
             // given

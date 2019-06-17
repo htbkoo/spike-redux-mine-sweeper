@@ -19,7 +19,8 @@ type PlayingGameState = {
     "status": GameStatus.PLAYING,
     "board": Board,
     "meta": {
-        "size": BoardSize
+        "size": BoardSize,
+        "numBomb": number,
     },
 };
 

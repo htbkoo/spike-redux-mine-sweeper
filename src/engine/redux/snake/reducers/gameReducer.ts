@@ -34,6 +34,23 @@ export function createGameReducer(overrides: Dependencies = DEFAULT_DEPENDENCIES
 
                 }
             }
+            case ActionType.START_GAME: {
+                switch (state.status) {
+                    case GameStatus.CONFIG:{
+                        return {
+                            status: GameStatus.PLAYING,
+                            meta:{
+                                size: {
+                                    h: state.config.h,
+                                    w: state.config.w,
+                                },
+                                numBomb: state.config.numBomb
+                            },
+                            board: []
+                        }
+                    }
+                }
+            }
         }
         return state;
     }

@@ -1,7 +1,7 @@
 import {GameConfig} from "../models/state";
 
 export enum ActionType {
-    UPDATE_CONFIG
+    UPDATE_CONFIG, START_GAME
 }
 
 export type UpdateConfigAction = {
@@ -10,6 +10,11 @@ export type UpdateConfigAction = {
     newValue: GameConfig[UpdateConfigAction['field']]
 }
 
+export type StartGameAction = {
+    type: ActionType.START_GAME,
+}
+
 export type Action =
-    | UpdateConfigAction;
+    | UpdateConfigAction
+    | StartGameAction;
 

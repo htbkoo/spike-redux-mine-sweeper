@@ -1,7 +1,7 @@
 import {createStore} from "redux";
 import {GameStatus} from "../models/state";
 import {createGameReducer} from "./gameReducer";
-import {updateConfig} from "../actions/actionCreators";
+import {startGame, updateConfig} from "../actions/actionCreators";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {
@@ -65,6 +65,33 @@ describe('gameReducer', function () {
             // then
             return expect(store.getState()).toEqual(expected);
         });
+    });
 
+    it('should progress to PlayingGameState upon Action.StartGameAction', () => {
+        // given
+        const store = createStore(createGameReducer(), {
+            status: GameStatus.CONFIG,
+            config: {
+                h: 6,
+                w: 8,
+                numBomb: 10
+            }
+        });
+
+        // when
+        store.dispatch(startGame());
+
+        // then
+        return expect(store.getState()).toEqual({
+            "status": GameStatus.PLAYING,
+            "board": [],
+            "meta": {
+                "size": {
+                    "h": 6,
+                    "w": 8,
+                },
+                "numBomb": 10
+            },
+        });
     });
 });

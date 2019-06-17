@@ -1,10 +1,18 @@
 import {Cell} from "./Cell";
+import {rootReducer} from "../reducers/rootReducer";
 
 export type ItemId = string;
 
-type GameConfigState = {
+export type GameConfig = {
+    "w": number,
+    "h": number,
+    "numBomb": number
+};
+
+export type GameConfigState = {
     "status": GameStatus.CONFIG,
     "prevGame"?: PlayingGameState
+    "config": GameConfig
 }
 
 type PlayingGameState = {
@@ -15,7 +23,7 @@ type PlayingGameState = {
     },
 };
 
-type GameState =
+export type GameState =
     | PlayingGameState
     | GameConfigState;
 
@@ -24,12 +32,10 @@ export enum GameStatus {
 }
 
 type BoardSize = {
-    "w": 0,
-    "h": 0
+    "w": number,
+    "h": number
 }
 
 type Board = Cell[][];
 
-export type State = {
-    "game": GameState
-}
+export type AppState = ReturnType<typeof rootReducer>

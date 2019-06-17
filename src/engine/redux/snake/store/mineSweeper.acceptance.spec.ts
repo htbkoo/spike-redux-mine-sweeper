@@ -1,19 +1,47 @@
 import {createStore} from "redux";
 import {GameStatus} from "../models/state";
-import {createReducers} from "../reducers/reducersFactory";
-// import {addItem, clearItems, editItem, toggleItem} from "../actions/ActionCreators";
+import {rootReducer} from "../reducers/rootReducer";
+import {updateCofnfig} from "../actions/actions";
 
 describe('Mine Sweeper', function () {
-    it('should create store for initial state', () => {
-        // given
-        // when
-        const store = createStore(createReducers());
+    describe('Config State', () => {
+        it('should create store for initial state', () => {
+            // given
+            // when
+            const store = createStore(rootReducer);
 
-        // then
-        return expect(store.getState()).toEqual({
-            game: {
-                status: GameStatus.CONFIG
-            }
+            // then
+            return expect(store.getState()).toEqual({
+                game: {
+                    status: GameStatus.CONFIG,
+                    config: {
+                        h: 8,
+                        w: 8,
+                        numBomb: 6
+                    }
+                }
+            });
+        });
+
+        it('should update config', () => {
+            // given
+            const store = createStore(rootReducer);
+
+            // when
+            store.dispatch(updateCofnfig({field: "h", newValue: 20}));
+
+            // then
+            return expect(store.getState()).toEqual({
+                game: {
+                    status: GameStatus.CONFIG,
+                    config: {
+                        h: 20,
+                        w: 8,
+                        numBomb: 6
+                    }
+                }
+            });
         });
     });
+
 });

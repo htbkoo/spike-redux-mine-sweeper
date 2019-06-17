@@ -13,7 +13,7 @@ type UpdateConfigAction = {
 export type Action =
     | UpdateConfigAction;
 
-export function updateCofnfig({field, newValue}: Pick<UpdateConfigAction, 'field' | 'newValue'>): UpdateConfigAction {
+export function updateConfig({field, newValue}: Pick<UpdateConfigAction, 'field' | 'newValue'>): UpdateConfigAction {
     return {
         type: ActionType.UPDATE_CONFIG,
         field,

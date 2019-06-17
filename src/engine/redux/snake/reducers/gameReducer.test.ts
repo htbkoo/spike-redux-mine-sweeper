@@ -1,7 +1,7 @@
 import {createStore} from "redux";
 import {GameStatus} from "../models/state";
 import {createGameReducer} from "./gameReducer";
-import {updateCofnfig} from "../actions/actions";
+import {updateConfig} from "../actions/actions";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {
@@ -20,21 +20,29 @@ describe('gameReducer', function () {
         });
     });
 
-    it('should update config', () => {
-        // given
-        const store = createStore(createGameReducer());
-
-        // when
-        store.dispatch(updateCofnfig({field: "h", newValue: 20}));
-
-        // then
-        return expect(store.getState()).toEqual({
-            status: GameStatus.CONFIG,
-            config: {
-                h: 20,
-                w: 8,
-                numBomb: 6
+    [
+        {
+            config: {field: "h", newValue: 20},
+            expected: {
+                status: GameStatus.CONFIG,
+                config: {
+                    h: 20,
+                    w: 8,
+                    numBomb: 6
+                }
             }
+        },
+    ].forEach(({config, expected}) => {
+        it(`should update config for field "${config.field}" to ${config.newValue}`, () => {
+            // given
+            const store = createStore(createGameReducer());
+
+            // when
+            store.dispatch(updateConfig(config as any));
+
+            // then
+            return expect(store.getState()).toEqual(expected);
         });
+
     });
 });

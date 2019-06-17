@@ -1,7 +1,7 @@
 import {createStore} from "redux";
 import {GameStatus} from "../models/state";
 import {rootReducer} from "../reducers/rootReducer";
-import {updateCofnfig} from "../actions/actions";
+import {updateConfig} from "../actions/actions";
 
 describe('Mine Sweeper', function () {
     describe('Config State', () => {
@@ -28,7 +28,7 @@ describe('Mine Sweeper', function () {
             const store = createStore(rootReducer);
 
             // when
-            store.dispatch(updateCofnfig({field: "h", newValue: 20}));
+            store.dispatch(updateConfig({field: "h", newValue: 20}));
 
             // then
             return expect(store.getState()).toEqual({

@@ -22,36 +22,28 @@ export function createGameReducer(overrides: Dependencies = DEFAULT_DEPENDENCIES
         ...DEFAULT_DEPENDENCIES,
         ...overrides
     };
-    return (state = EMPTY_STATE, action) => {
-        switch (action.type) {
-            case ActionType.UPDATE_CONFIG: {
-                switch (state.status) {
-                    case GameStatus.CONFIG: {
-                        return produce(state, draft => {
-                            draft.config[action.field] = action.newValue;
-                        });
-                    }
 
-                }
-            }
-            case ActionType.START_GAME: {
-                switch (state.status) {
-                    case GameStatus.CONFIG:{
-                        return {
-                            status: GameStatus.PLAYING,
-                            meta:{
-                                size: {
-                                    h: state.config.h,
-                                    w: state.config.w,
-                                },
-                                numBomb: state.config.numBomb
-                            },
-                            board: []
-                        }
-                    }
+    return (state = EMPTY_STATE, action) => {
+        if (GameStatus.CONFIG === state.status) {
+            if (action.type === ActionType.UPDATE_CONFIG) {
+                return produce(state, draft => {
+                    draft.config[action.field] = action.newValue;
+                });
+            } else if (action.type === ActionType.START_GAME) {
+                return {
+                    status: GameStatus.PLAYING,
+                    meta: {
+                        size: {
+                            h: state.config.h,
+                            w: state.config.w,
+                        },
+                        numBomb: state.config.numBomb
+                    },
+                    board: []
                 }
             }
         }
+
         return state;
     }
 }

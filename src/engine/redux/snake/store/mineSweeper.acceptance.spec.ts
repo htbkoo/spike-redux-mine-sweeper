@@ -1,7 +1,7 @@
 import {createStore} from "redux";
 import {GameStatus} from "../models/state";
 import {rootReducer} from "../reducers/rootReducer";
-import {updateConfig} from "../actions/actions";
+import {updateConfig} from "../actions/actionCreators";
 
 describe('Mine Sweeper', function () {
     describe('Config State', () => {

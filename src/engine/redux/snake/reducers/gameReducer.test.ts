@@ -1,7 +1,7 @@
 import {createStore} from "redux";
 import {GameStatus} from "../models/state";
 import {createGameReducer} from "./gameReducer";
-import {updateConfig} from "../actions/actions";
+import {updateConfig} from "../actions/actionCreators";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {

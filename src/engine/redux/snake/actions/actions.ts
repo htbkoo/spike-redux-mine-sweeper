@@ -4,7 +4,7 @@ export enum ActionType {
     UPDATE_CONFIG
 }
 
-type UpdateConfigAction = {
+export type UpdateConfigAction = {
     type: ActionType.UPDATE_CONFIG,
     field: keyof GameConfig,
     newValue: GameConfig[UpdateConfigAction['field']]
@@ -13,10 +13,3 @@ type UpdateConfigAction = {
 export type Action =
     | UpdateConfigAction;
 
-export function updateConfig({field, newValue}: Pick<UpdateConfigAction, 'field' | 'newValue'>): UpdateConfigAction {
-    return {
-        type: ActionType.UPDATE_CONFIG,
-        field,
-        newValue
-    }
-}

@@ -37,6 +37,6 @@ type BoardSize = {
     "h": number
 }
 
-type Board = Cell[][];
+export type Board = Cell[][];
 
 export type AppState = ReturnType<typeof rootReducer>

@@ -71,6 +71,7 @@ describe('gameReducer', function () {
     it('should progress to PlayingGameState upon Action.StartGameAction', () => {
         // given
         const store = createStore();
+        const MOCK_BOARD = [[], [], [], [], []];
 
         // when
         store.dispatch(startGame({
@@ -78,13 +79,18 @@ describe('gameReducer', function () {
                 h: 6,
                 w: 8,
                 numBomb: 10
+            },
+            boardFactory: {
+                createBoard() {
+                    return MOCK_BOARD;
+                }
             }
         }));
 
         // then
         return expect(store.getState()).toEqual({
             "status": GameStatus.PLAYING,
-            "board": [],
+            "board": MOCK_BOARD,
             "meta": {
                 "size": {
                     "h": 6,

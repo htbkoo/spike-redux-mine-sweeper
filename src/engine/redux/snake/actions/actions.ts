@@ -1,4 +1,4 @@
-import {GameConfig} from "../models/state";
+import {Board, GameConfig} from "../models/state";
 
 export enum ActionType {
     UPDATE_CONFIG, START_GAME
@@ -12,7 +12,8 @@ export type UpdateConfigAction = {
 
 export type StartGameAction = {
     type: ActionType.START_GAME,
-    config: GameConfig
+    board: Board,
+    config: GameConfig,
 }
 
 export type Action =

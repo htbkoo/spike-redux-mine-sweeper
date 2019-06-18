@@ -13,6 +13,7 @@ export function updateConfig({field, newValue}: Pick<UpdateConfigAction, 'field'
 export function startGame({config, boardFactory = randomBoardFactory}: { config: GameConfig, boardFactory?: BoardFactory }): StartGameAction {
     return {
         type: ActionType.START_GAME,
-        config,
+        board: boardFactory.createBoard(config),
+        config
     };
 }

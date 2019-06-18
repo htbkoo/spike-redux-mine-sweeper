@@ -29,7 +29,7 @@ export const gameReducer: Reducer<GameState, Action> = (state = EMPTY_STATE, act
                     },
                     numBomb: action.config.numBomb
                 },
-                board: []
+                board: action.board
             }
         }
     }

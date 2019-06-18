@@ -1,13 +1,14 @@
-import {createStore} from "redux";
-import {GameStatus} from "../models/state";
+import {configureStore, ConfigureStoreOptions} from 'redux-starter-kit'
+import {GameState, GameStatus} from "../models/state";
 import {createGameReducer} from "./gameReducer";
 import {startGame, updateConfig} from "../actions/actionCreators";
+import {Action} from "../actions/actions";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {
         // given
         // when
-        const store = createStore(createGameReducer());
+        const store = createStore();
 
         // then
         return expect(store.getState()).toEqual({
@@ -57,7 +58,7 @@ describe('gameReducer', function () {
     ].forEach(({config, expected}) => {
         it(`should update config for field "${config.field}" to ${config.newValue}`, () => {
             // given
-            const store = createStore(createGameReducer());
+            const store = createStore();
 
             // when
             store.dispatch(updateConfig(config as any));
@@ -69,12 +70,14 @@ describe('gameReducer', function () {
 
     it('should progress to PlayingGameState upon Action.StartGameAction', () => {
         // given
-        const store = createStore(createGameReducer(), {
-            status: GameStatus.CONFIG,
-            config: {
-                h: 6,
-                w: 8,
-                numBomb: 10
+        const store = createStore({
+            preloadedState: {
+                status: GameStatus.CONFIG,
+                config: {
+                    h: 6,
+                    w: 8,
+                    numBomb: 10
+                }
             }
         });
 
@@ -94,4 +97,12 @@ describe('gameReducer', function () {
             },
         });
     });
+
+    function createStore(overrides: Partial<ConfigureStoreOptions<GameState, Action>> = {}) {
+        return configureStore({
+            reducer: createGameReducer(),
+            devTools: false,
+            ...overrides
+        });
+    }
 });

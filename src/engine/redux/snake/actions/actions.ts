@@ -12,6 +12,7 @@ export type UpdateConfigAction = {
 
 export type StartGameAction = {
     type: ActionType.START_GAME,
+    config: GameConfig
 }
 
 export type Action =

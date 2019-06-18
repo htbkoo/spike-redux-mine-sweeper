@@ -1,4 +1,6 @@
 import {ActionType, StartGameAction, UpdateConfigAction} from "./actions";
+import {GameConfig} from "../models/state";
+import {BoardFactory, randomBoardFactory} from "../services/BoardFactory";
 
 export function updateConfig({field, newValue}: Pick<UpdateConfigAction, 'field' | 'newValue'>): UpdateConfigAction {
     return {
@@ -8,8 +10,9 @@ export function updateConfig({field, newValue}: Pick<UpdateConfigAction, 'field'
     }
 }
 
-export function startGame(): StartGameAction {
+export function startGame({config, boardFactory = randomBoardFactory}: { config: GameConfig, boardFactory?: BoardFactory }): StartGameAction {
     return {
-        type: ActionType.START_GAME
+        type: ActionType.START_GAME,
+        config,
     };
 }

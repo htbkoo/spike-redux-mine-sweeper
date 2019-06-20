@@ -17,8 +17,11 @@ export class RandomIntegerSequenceGenerator implements SequenceGenerator<number>
 
     generate({start, end, length,}: { start: number; end: number; length: number }): Array<number> {
         const candidates = _.range(start, end);
+        return _.range(0, length).map(() => this.getNextRandomNumberFrom(candidates));
+    }
 
-        return _.range(0, length).map(() => candidates.splice(this.getRandomInt(0, candidates.length), 1)[0]);
+    private getNextRandomNumberFrom(candidates: Array<number>) {
+        return candidates.splice(this.getRandomInt(0, candidates.length), 1)[0];
     }
 
     // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values

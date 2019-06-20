@@ -22,6 +22,6 @@ describe('SequenceGenerator', function () {
         yield 0.4221318771794387;
         yield 0.7317617458221114;
         yield 0.9503132062240779;
-        return;
+        throw new Error("Defect in test - exhausted random number");
     }
 });

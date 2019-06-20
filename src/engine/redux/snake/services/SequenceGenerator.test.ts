@@ -26,6 +26,19 @@ describe('SequenceGenerator', function () {
             // then
             return expect(numbers).toEqual([0, 1, 2]);
         });
+
+        it('should throw exception if length is out of range', () => {
+            // given
+            const generator = new RandomIntegerSequenceGenerator({
+                random: () => {
+                    throw new Error("Should not reach here");
+                }
+            });
+
+            // when
+            // then
+            return expect(() => generator.generate({start: 0, end: 10, length: 11})).toThrow("Invalid length, expected at most <10> but got <11>");
+        });
     });
 
     function* randomGenerator() {

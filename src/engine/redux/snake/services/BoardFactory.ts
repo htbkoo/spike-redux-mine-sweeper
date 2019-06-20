@@ -9,16 +9,14 @@ export interface BoardFactory {
 }
 
 export class RandomBoardFactory implements BoardFactory {
-    public static readonly DEFAULT: RandomBoardFactory = new RandomBoardFactory(new RandomIntegerSequenceGenerator());
+    public static readonly DEFAULT: RandomBoardFactory = new RandomBoardFactory({
+        sequenceGenerator: RandomIntegerSequenceGenerator.DEFAULT
+    });
 
     private readonly sequenceGenerator: SequenceGenerator<number>;
 
-    private constructor(sequenceGenerator: SequenceGenerator<number>) {
+    constructor({sequenceGenerator}: { sequenceGenerator: SequenceGenerator<number> }) {
         this.sequenceGenerator = sequenceGenerator;
-    }
-
-    public static newInstance({sequenceGenerator}: { sequenceGenerator: SequenceGenerator<number> }): RandomBoardFactory {
-        return new RandomBoardFactory(sequenceGenerator)
     }
 
     createBoard({w, h, numBomb}: GameConfig): Board {

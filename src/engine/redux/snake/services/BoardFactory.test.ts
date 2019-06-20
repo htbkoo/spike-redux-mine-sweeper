@@ -10,7 +10,7 @@ describe('BoardFactory', function () {
             }
         };
 
-        const factory = RandomBoardFactory.newInstance({sequenceGenerator: mockSequenceGenerator});
+        const factory = new RandomBoardFactory({sequenceGenerator: mockSequenceGenerator});
 
         // when
         const board = factory.createBoard({h: 2, w: 5, numBomb: 3});

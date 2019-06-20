@@ -15,6 +15,17 @@ describe('SequenceGenerator', function () {
             // then
             return expect(numbers).toEqual([2, 4, 7]);
         });
+
+        it('should generate distinct sequence even if random numbers are the same', () => {
+            // given
+            const generator = new RandomIntegerSequenceGenerator({random: () => 0});
+
+            // when
+            const numbers = generator.generate({start: 0, end: 10, length: 3});
+
+            // then
+            return expect(numbers).toEqual([0, 1, 2]);
+        });
     });
 
     function* randomGenerator() {

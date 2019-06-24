@@ -2,7 +2,9 @@ import {ActionType, StartGameAction, UpdateConfigAction} from "./actions";
 import {GameConfig} from "../models/state";
 import {BoardFactory, RandomBoardFactory} from "../services/BoardFactory";
 
-export function updateConfig({field, newValue}: Pick<UpdateConfigAction, 'field' | 'newValue'>): UpdateConfigAction {
+export type UpdatedConfig = Pick<UpdateConfigAction, 'field' | 'newValue'>;
+
+export function updateConfig({field, newValue}: UpdatedConfig): UpdateConfigAction {
     return {
         type: ActionType.UPDATE_CONFIG,
         field,

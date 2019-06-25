@@ -15,10 +15,12 @@ export class RandomIntegerSequenceGenerator implements SequenceGenerator<number>
         this.random = random;
     }
 
-    generate({start, end, length,}: { start: number; end: number; length: number }): Array<number> {
+    generate({start, end, length, skip = []}: { start: number; end: number; length: number, skip?: Array<number> }): Array<number> {
         RandomIntegerSequenceGenerator.validateConfig({start, end, length,});
 
-        const candidates = _.range(start, end);
+        const candidates = _.range(start, end)
+            .filter(candidate => RandomIntegerSequenceGenerator.shouldKeepCandidate({candidate, skip}));
+
         return _.range(0, length).map(() => this.getNextRandomNumberFrom(candidates));
     }
 
@@ -38,5 +40,9 @@ export class RandomIntegerSequenceGenerator implements SequenceGenerator<number>
         if (length > maxLength) {
             throw new Error(`Invalid length, expected at most <${maxLength}> but got <${length}>`);
         }
+    }
+
+    private static shouldKeepCandidate({candidate, skip}: { candidate: number; skip: Array<number> }): boolean {
+        return skip.indexOf(candidate) === -1;
     }
 }

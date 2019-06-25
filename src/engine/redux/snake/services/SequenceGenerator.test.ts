@@ -7,6 +7,9 @@ describe('SequenceGenerator', function () {
             {config: {start: 0, end: 10, length: 1}, expected: [2,]},
             {config: {start: 0, end: 10, length: 2}, expected: [2, 4,]},
             {config: {start: 0, end: 10, length: 3}, expected: [2, 4, 7]},
+            {config: {start: 0, end: 10, length: 3, skip: []}, expected: [2, 4, 7]},
+            {config: {start: 0, end: 10, length: 3, skip: [2]}, expected: [3, 5, 8]},
+            {config: {start: 0, end: 10, length: 3, skip: [2, 3]}, expected: [1, 5, 8]},
             {config: {start: 0, end: 3, length: 3}, expected: [0, 1, 2,]},
             {config: {start: 0, end: 4, length: 4}, expected: [0, 2, 3, 1]},
         ].forEach(({config, expected}) =>
@@ -36,6 +39,7 @@ describe('SequenceGenerator', function () {
             return expect(numbers).toEqual([0, 1, 2]);
         });
 
+        // todo: add check for skip
         it('should throw exception if length is out of range', () => {
             // given
             const generator = new RandomIntegerSequenceGenerator({

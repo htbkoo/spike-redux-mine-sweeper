@@ -16,10 +16,10 @@ export class RandomIntegerSequenceGenerator implements SequenceGenerator<number>
     }
 
     generate({start, end, length, skip = []}: { start: number; end: number; length: number, skip?: Array<number> }): Array<number> {
-        RandomIntegerSequenceGenerator.validateConfig({start, end, length,});
-
         const candidates = _.range(start, end)
             .filter(candidate => RandomIntegerSequenceGenerator.shouldKeepCandidate({candidate, skip}));
+
+        RandomIntegerSequenceGenerator.validateCandidates({candidates, length,});
 
         return _.range(0, length).map(() => this.getNextRandomNumberFrom(candidates));
     }
@@ -35,8 +35,8 @@ export class RandomIntegerSequenceGenerator implements SequenceGenerator<number>
         return Math.floor(this.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
-    private static validateConfig({start, end, length,}: { start: number; end: number; length: number }) {
-        const maxLength = end - start;
+    private static validateCandidates({candidates, length,}: { candidates: Array<number>; length: number }) {
+        const maxLength = candidates.length;
         if (length > maxLength) {
             throw new Error(`Invalid length, expected at most <${maxLength}> but got <${length}>`);
         }

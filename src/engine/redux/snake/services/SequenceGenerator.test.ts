@@ -40,22 +40,40 @@ describe('SequenceGenerator', function () {
         });
 
         // todo: add check for skip
-        it('should throw exception if length is out of range', () => {
-            // given
-            const generator = new RandomIntegerSequenceGenerator({
-                random: () => {
-                    throw new Error("Should not reach here");
-                }
-            });
+        [
+            {
+                scenario: "length is out of range",
+                config: {
+                    start: 0,
+                    end: 10,
+                    length: 11
+                },
+                errorMessage: "Invalid length, expected at most <10> but got <11>"
+            },
+            {
+                scenario: "no enough candidates after skip",
+                config: {
+                    start: 0,
+                    end: 10,
+                    length: 10,
+                    skip: [1]
+                },
+                errorMessage: "Invalid length, expected at most <9> but got <10>"
+            },
+        ].forEach(({config, errorMessage, scenario}) =>
+            it(`should throw exception if ${scenario}`, () => {
+                // given
+                const generator = new RandomIntegerSequenceGenerator({
+                    random: () => {
+                        throw new Error("Should not reach here");
+                    }
+                });
 
-            // when
-            // then
-            return expect(() => generator.generate({
-                start: 0,
-                end: 10,
-                length: 11
-            })).toThrow("Invalid length, expected at most <10> but got <11>");
-        });
+                // when
+                // then
+                return expect(() => generator.generate(config)).toThrow(errorMessage);
+            })
+        );
     });
 
     function* randomGenerator() {

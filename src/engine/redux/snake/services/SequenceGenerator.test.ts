@@ -39,7 +39,6 @@ describe('SequenceGenerator', function () {
             return expect(numbers).toEqual([0, 1, 2]);
         });
 
-        // todo: add check for skip
         [
             {
                 scenario: "length is out of range",

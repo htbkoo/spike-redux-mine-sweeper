@@ -15,20 +15,19 @@ export type GameConfigState = {
     "config": GameConfig
 }
 
+export type GameMeta = {
+    "size": BoardSize,
+    "numBomb": number,
+};
+
 type PreStartGameState = {
     "status": GameStatus.PRE_START,
-    "meta": {
-        "size": BoardSize,
-        "numBomb": number,
-    },
+    "meta": GameMeta,
 };
 type PlayingGameState = {
     "status": GameStatus.PLAYING,
     "board": Board,
-    "meta": {
-        "size": BoardSize,
-        "numBomb": number,
-    },
+    "meta": GameMeta,
 };
 
 export type GameState =

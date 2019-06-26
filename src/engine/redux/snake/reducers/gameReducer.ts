@@ -19,9 +19,9 @@ export const gameReducer: Reducer<GameState, Action> = (state = EMPTY_STATE, act
             return produce(state, draft => {
                 draft.config[action.field] = action.newValue;
             });
-        } else if (action.type === ActionType.START_GAME) {
+        } else if (action.type === ActionType.CREATE_EMPTY_BOARD) {
             return {
-                status: GameStatus.PLAYING,
+                status: GameStatus.PRE_START,
                 meta: {
                     size: {
                         h: action.config.h,
@@ -29,7 +29,6 @@ export const gameReducer: Reducer<GameState, Action> = (state = EMPTY_STATE, act
                     },
                     numBomb: action.config.numBomb
                 },
-                board: action.board
             }
         }
     }

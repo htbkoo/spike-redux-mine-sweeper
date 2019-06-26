@@ -1,4 +1,4 @@
-import {ActionType, StartGameAction, UpdateConfigAction} from "./actions";
+import {ActionType, CreateEmptyBoardAction, StartGameAction, UpdateConfigAction} from "./actions";
 import {GameConfig} from "../models/state";
 import {BoardFactory, RandomBoardFactory} from "../services/BoardFactory";
 
@@ -10,6 +10,13 @@ export function updateConfig({field, newValue}: UpdatedConfig): UpdateConfigActi
         field,
         newValue
     }
+}
+
+export function createEmptyBoard({config}: { config: GameConfig, }): CreateEmptyBoardAction {
+    return {
+        type: ActionType.CREATE_EMPTY_BOARD,
+        config
+    };
 }
 
 export function startGame({config, boardFactory = RandomBoardFactory.DEFAULT}: { config: GameConfig, boardFactory?: BoardFactory }): StartGameAction {

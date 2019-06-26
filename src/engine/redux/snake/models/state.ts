@@ -15,6 +15,13 @@ export type GameConfigState = {
     "config": GameConfig
 }
 
+type PreStartGameState = {
+    "status": GameStatus.PRE_START,
+    "meta": {
+        "size": BoardSize,
+        "numBomb": number,
+    },
+};
 type PlayingGameState = {
     "status": GameStatus.PLAYING,
     "board": Board,
@@ -26,10 +33,11 @@ type PlayingGameState = {
 
 export type GameState =
     | PlayingGameState
-    | GameConfigState;
+    | GameConfigState
+    | PreStartGameState;
 
 export enum GameStatus {
-    PLAYING, CONFIG
+    PRE_START, PLAYING, CONFIG
 }
 
 type BoardSize = {

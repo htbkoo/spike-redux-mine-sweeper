@@ -1,7 +1,7 @@
 import {configureStore, ConfigureStoreOptions} from 'redux-starter-kit'
 import {GameState, GameStatus} from "../models/state";
 import {gameReducer} from "./gameReducer";
-import {startGame, updateConfig} from "../actions/actionCreators";
+import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
 import {Action} from "../actions/actions";
 
 describe('gameReducer', function () {
@@ -68,9 +68,48 @@ describe('gameReducer', function () {
         });
     });
 
-    it('should progress to PlayingGameState upon Action.StartGameAction', () => {
+    it('should progress to PreStartGameState upon Action.StartGameAction', () => {
         // given
         const store = createStore();
+
+        // when
+        store.dispatch(createEmptyBoard({
+            config: {
+                h: 6,
+                w: 8,
+                numBomb: 10
+            },
+        }));
+
+        // then
+        return expect(store.getState()).toEqual({
+            "status": GameStatus.PRE_START,
+            "meta": {
+                "size": {
+                    "h": 6,
+                    "w": 8,
+                },
+                "numBomb": 10
+            },
+        });
+    });
+
+    xit('should progress to PlayingGameState upon Action.StartGameAction', () => {
+        // given
+        const store = createStore(
+            {
+                preloadedState: {
+                    "status": GameStatus.PRE_START,
+                    "meta": {
+                        "size": {
+                            "h": 6,
+                            "w": 8,
+                        },
+                        "numBomb": 10
+                    },
+                }
+            }
+        );
         const MOCK_BOARD = [[], [], [], [], []];
 
         // when

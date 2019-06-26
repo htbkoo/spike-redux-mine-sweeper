@@ -13,8 +13,18 @@ export class Board {
         return new Board({cells});
     }
 
-    public static newBlank({w, h}: { w: number, h: number }): Board {
-        const cells = _.range(0, h).map(() => _.range(0, w).map(() => Cell.EMPTY));
+    public static newBoard({w, h, bombsIndices = []}: { w: number, h: number, bombsIndices?: Array<number> }): Board {
+        const cells = _.range(0, h).map(r =>
+            _.range(0, w).map(c =>
+                isMine(r, c) ? Cell.MINE : Cell.EMPTY
+            )
+        );
+
+        function isMine(r: number, c: number) {
+            const flattenIndex: number = r * w + c;
+            return bombsIndices.indexOf(flattenIndex) !== -1
+        }
+
         return new Board({cells});
     }
 

@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import {Cell} from "./Cell";
 
 export class Board {
@@ -11,7 +13,8 @@ export class Board {
         return new Board({cells});
     }
 
-    public static newBlank({cells}: { cells: Cell[][] }): Board {
+    public static newBlank({w, h}: { w: number, h: number }): Board {
+        const cells = _.range(0, h).map(() => _.range(0, w).map(() => Cell.EMPTY));
         return new Board({cells});
     }
 

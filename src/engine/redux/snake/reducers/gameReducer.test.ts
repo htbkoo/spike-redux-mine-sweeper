@@ -68,7 +68,7 @@ describe('gameReducer', function () {
         });
     });
 
-    it('should progress to PreStartGameState upon Action.StartGameAction', () => {
+    it('should progress to PreStartGameState upon Action.CreateEmptyBoardAction', () => {
         // given
         const store = createStore();
 

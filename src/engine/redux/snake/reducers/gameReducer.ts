@@ -13,23 +13,45 @@ const EMPTY_STATE: GameState = {
     }
 };
 
-export const gameReducer: Reducer<GameState, Action> = (state = EMPTY_STATE, action: Action) => {
-    if (GameStatus.CONFIG === state.status) {
-        if (action.type === ActionType.UPDATE_CONFIG) {
-            return produce(state, draft => {
-                draft.config[action.field] = action.newValue;
-            });
-        } else if (action.type === ActionType.CREATE_EMPTY_BOARD) {
-            return {
-                status: GameStatus.PRE_START,
-                meta: {
-                    size: {
-                        h: action.config.h,
-                        w: action.config.w,
-                    },
-                    numBomb: action.config.numBomb
-                },
+export const gameReducer: Reducer<GameState, Action> = (state: GameState = EMPTY_STATE, action: Action) => {
+    switch (state.status) {
+        case GameStatus.PLAYING: {
+            break;
+        }
+        case GameStatus.PRE_START: {
+            // noinspection JSRedundantSwitchStatement
+            switch (action.type) {
+                case ActionType.START_GAME: {
+                    return {
+                        status: GameStatus.PLAYING,
+                        meta: state.meta,
+                        board: action.board
+                    };
+                }
             }
+            break;
+        }
+        case GameStatus.CONFIG: {
+            switch (action.type) {
+                case ActionType.UPDATE_CONFIG: {
+                    return produce(state, draft => {
+                        draft.config[action.field] = action.newValue;
+                    });
+                }
+                case ActionType.CREATE_EMPTY_BOARD: {
+                    return {
+                        status: GameStatus.PRE_START,
+                        meta: {
+                            size: {
+                                h: action.config.h,
+                                w: action.config.w,
+                            },
+                            numBomb: action.config.numBomb
+                        },
+                    }
+                }
+            }
+            break;
         }
     }
 

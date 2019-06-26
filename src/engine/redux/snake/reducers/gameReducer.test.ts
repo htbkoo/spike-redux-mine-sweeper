@@ -111,7 +111,7 @@ describe('gameReducer', function () {
                 }
             }
         );
-        const MOCK_BOARD = new Board({cells: [[], [], [], [], []]});
+        const MOCK_BOARD = Board.fromCells({cells: [[], [], [], [], []]});
 
         // when
         store.dispatch(startGame({

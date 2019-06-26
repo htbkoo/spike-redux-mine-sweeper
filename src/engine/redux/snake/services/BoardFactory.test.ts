@@ -17,10 +17,12 @@ describe('BoardFactory', function () {
 
         // then
         return expect(board).toEqual(
-            [
-                [Cell.MINE, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
-                [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.MINE, Cell.MINE,],
-            ]
+            {
+                cells: [
+                    [Cell.MINE, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
+                    [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.MINE, Cell.MINE,],
+                ]
+            }
         );
     });
 });

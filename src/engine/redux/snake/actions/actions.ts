@@ -1,4 +1,5 @@
-import {Board, GameConfig} from "../models/state";
+import {GameConfig} from "../models/state";
+import {Board} from "../models/Board";
 
 export enum ActionType {
     UPDATE_CONFIG, CREATE_EMPTY_BOARD, START_GAME

@@ -3,6 +3,7 @@ import {GameState, GameStatus} from "../models/state";
 import {gameReducer} from "./gameReducer";
 import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
 import {Action} from "../actions/actions";
+import {Board} from "../models/Board";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {
@@ -110,7 +111,7 @@ describe('gameReducer', function () {
                 }
             }
         );
-        const MOCK_BOARD = [[], [], [], [], []];
+        const MOCK_BOARD = new Board({cells: [[], [], [], [], []]});
 
         // when
         store.dispatch(startGame({

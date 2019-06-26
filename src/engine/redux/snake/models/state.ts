@@ -1,5 +1,5 @@
-import {Cell} from "./Cell";
 import {rootReducer} from "../reducers/rootReducer";
+import {Board} from "./Board";
 
 export type ItemId = string;
 
@@ -43,7 +43,5 @@ type BoardSize = {
     "w": number,
     "h": number
 }
-
-export type Board = Cell[][];
 
 export type AppState = ReturnType<typeof rootReducer>

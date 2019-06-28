@@ -1,9 +1,11 @@
-import {UpdateConfigAction} from "./actions";
 import {GameConfig} from "../models/state";
 import {BoardFactory, RandomBoardFactory} from "../services/BoardFactory";
 import {createStandardAction} from 'typesafe-actions';
 
-export type UpdatedConfig = Pick<UpdateConfigAction, 'field' | 'newValue'>;
+export type UpdatedConfig = {
+    field: keyof GameConfig,
+    newValue: GameConfig[UpdatedConfig['field']]
+};
 
 export const updateConfig = createStandardAction('UPDATE_CONFIG')
     .map(({field, newValue}: UpdatedConfig) => ({payload: {field, newValue}}));

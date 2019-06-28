@@ -20,7 +20,7 @@ export type GameMeta = {
     "numBomb": number,
 };
 
-type PreStartGameState = {
+export type PreStartGameState = {
     "status": GameStatus.PRE_START,
     "meta": GameMeta,
 };

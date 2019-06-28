@@ -22,7 +22,7 @@ export type StartGameAction = {
     config: GameConfig,
 }
 
-export type Action =
+export type RootAction =
     | UpdateConfigAction
     | StartGameAction
     | CreateEmptyBoardAction;

@@ -1,8 +1,8 @@
-import {Reducer} from "redux";
+import produce from "immer";
+import {createReducer} from 'typesafe-actions';
 
 import {GameState, GameStatus} from "../models/state";
-import {Action, ActionType} from "../actions/actions";
-import produce from "immer";
+import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
 
 const EMPTY_STATE: GameState = {
     status: GameStatus.CONFIG,
@@ -13,47 +13,34 @@ const EMPTY_STATE: GameState = {
     }
 };
 
-export const gameReducer: Reducer<GameState, Action> = (state: GameState = EMPTY_STATE, action: Action) => {
-    switch (state.status) {
-        case GameStatus.PLAYING: {
-            break;
-        }
-        case GameStatus.PRE_START: {
-            // noinspection JSRedundantSwitchStatement
-            switch (action.type) {
-                case ActionType.START_GAME: {
-                    return {
-                        status: GameStatus.PLAYING,
-                        meta: state.meta,
-                        board: action.board
-                    };
-                }
-            }
-            break;
-        }
-        case GameStatus.CONFIG: {
-            switch (action.type) {
-                case ActionType.UPDATE_CONFIG: {
-                    return produce(state, draft => {
-                        draft.config[action.field] = action.newValue;
-                    });
-                }
-                case ActionType.CREATE_EMPTY_BOARD: {
-                    return {
-                        status: GameStatus.PRE_START,
-                        meta: {
-                            size: {
-                                h: action.config.h,
-                                w: action.config.w,
-                            },
-                            numBomb: action.config.numBomb
-                        },
-                    }
-                }
-            }
-            break;
-        }
-    }
-
-    return state;
-};
+export const gameReducer = createReducer(EMPTY_STATE as GameState)
+    .handleAction(updateConfig, (state, {payload}) =>
+        GameStatus.CONFIG === state.status
+            ? produce(state, draft => {
+                draft.config[payload.field] = payload.newValue;
+            })
+            : state
+    )
+    .handleAction(createEmptyBoard, (state, {payload}) =>
+        GameStatus.CONFIG === state.status
+            ? ({
+                status: GameStatus.PRE_START,
+                meta: {
+                    size: {
+                        h: payload.config.h,
+                        w: payload.config.w,
+                    },
+                    numBomb: payload.config.numBomb
+                },
+            })
+            : state
+    )
+    .handleAction(startGame, (state, {payload}) =>
+        GameStatus.PRE_START === state.status
+            ? ({
+                status: GameStatus.PLAYING,
+                meta: state.meta,
+                board: payload.board
+            })
+            : state
+    );

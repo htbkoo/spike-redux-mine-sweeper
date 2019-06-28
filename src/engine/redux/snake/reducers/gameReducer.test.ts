@@ -2,7 +2,7 @@ import {configureStore, ConfigureStoreOptions} from 'redux-starter-kit'
 import {GameState, GameStatus} from "../models/state";
 import {gameReducer} from "./gameReducer";
 import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
-import {Action} from "../actions/actions";
+import {RootAction} from "../actions/actions";
 import {Board} from "../models/Board";
 
 describe('gameReducer', function () {
@@ -141,7 +141,7 @@ describe('gameReducer', function () {
         });
     });
 
-    function createStore(overrides: Partial<ConfigureStoreOptions<GameState, Action>> = {}) {
+    function createStore(overrides: Omit<Partial<ConfigureStoreOptions<GameState, RootAction>>, "reducer"> = {}) {
         return configureStore({
             reducer: gameReducer,
             devTools: false,

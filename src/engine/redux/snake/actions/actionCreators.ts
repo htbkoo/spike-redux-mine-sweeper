@@ -1,6 +1,7 @@
+import {createStandardAction} from 'typesafe-actions';
+
 import {GameConfig} from "../models/state";
 import {BoardFactory, RandomBoardFactory} from "../services/BoardFactory";
-import {createStandardAction} from 'typesafe-actions';
 
 export type UpdatedConfig = {
     field: keyof GameConfig,

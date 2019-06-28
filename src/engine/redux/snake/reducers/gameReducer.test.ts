@@ -1,10 +1,11 @@
-import {configureStore, ConfigureStoreOptions} from 'redux-starter-kit'
+import {configureStore, ConfigureStoreOptions} from 'redux-starter-kit';
+import {ActionType} from "typesafe-actions";
+
 import {GameState, GameStatus} from "../models/state";
 import {gameReducer} from "./gameReducer";
 import * as gameActions from "../actions/actionCreators";
 import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
 import {Board} from "../models/Board";
-import {ActionType} from "typesafe-actions";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {

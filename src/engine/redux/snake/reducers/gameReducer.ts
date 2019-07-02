@@ -1,46 +1,45 @@
 import produce from "immer";
 import {createReducer} from 'typesafe-actions';
 
-import {GameState, GameStatus} from "../models/state";
+import {GameState} from "../models/state";
 import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
+import {Board} from "../models/Board";
 
 const EMPTY_STATE: GameState = {
-    status: GameStatus.CONFIG,
     config: {
         h: 8,
         w: 8,
         numBomb: 6
+    },
+    board: Board.ZERO_SIZE_BOARD,
+    // todo: migrate size meta to Board
+    meta: {
+        isDialogOpen: true,
+        numBomb: 6,
+        size: {
+            h: 8,
+            w: 6
+        }
     }
 };
 
 export const gameReducer = createReducer(EMPTY_STATE as GameState)
     .handleAction(updateConfig, (state, {payload}) =>
-        GameStatus.CONFIG === state.status
-            ? produce(state, draft => {
-                draft.config[payload.field] = payload.newValue;
-            })
-            : state
+        produce(state, draft => {
+            draft.config[payload.field] = payload.newValue;
+        })
     )
     .handleAction(createEmptyBoard, (state, {payload}) =>
-        GameStatus.CONFIG === state.status
-            ? ({
-                status: GameStatus.PRE_START,
-                meta: {
-                    size: {
-                        h: payload.config.h,
-                        w: payload.config.w,
-                    },
-                    numBomb: payload.config.numBomb
-                },
-            })
-            : state
+        produce(state, draft => {
+            draft.meta.size = {
+                h: payload.config.h,
+                w: payload.config.w,
+            };
+            draft.meta.numBomb = payload.config.numBomb;
+        })
     )
     .handleAction(startGame, (state, {payload}) =>
-        GameStatus.PRE_START === state.status
-            ? ({
-                status: GameStatus.PLAYING,
-                meta: state.meta,
-                board: payload.board
-            })
-            : state
+        produce(state, draft => {
+
+        })
     );

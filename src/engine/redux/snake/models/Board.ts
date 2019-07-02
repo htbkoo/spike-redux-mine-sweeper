@@ -2,7 +2,10 @@ import _ from "lodash";
 
 import {Cell} from "./Cell";
 
+// todo: migrate size meta to Board
 export class Board {
+    public static readonly ZERO_SIZE_BOARD = new Board({cells: []});
+
     private readonly cells: Cell[][];
 
     private constructor({cells}: { cells: Cell[][] }) {

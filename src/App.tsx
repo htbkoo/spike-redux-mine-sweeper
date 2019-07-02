@@ -9,9 +9,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import './App.css';
-import {AppState, GameConfig, GameConfigState, GameState, GameStatus} from "./engine/redux/snake/models/state";
+import {AppState, GameConfig, GameState} from "./engine/redux/snake/models/state";
 import {startGame, updateConfig} from "./engine/redux/snake/actions/actionCreators";
+
+import './App.css';
 
 function GameConfigField({config, field, id, label, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, dispatch: Dispatch }) {
     return (
@@ -39,13 +40,12 @@ function GameConfigField({config, field, id, label, dispatch}: { config: GameCon
 //(updated: UpdatedConfig) => void
 
 function GameConfigDialog({gameState}: { gameState: GameState, }) {
-    const isConfigDialogOpen = GameStatus.CONFIG === gameState.status;
+    const {config, meta} = gameState;
+    const isConfigDialogOpen = meta.isDialogOpen;
     const dispatch = useDispatch();
 
     function optionalDialog() {
         if (isConfigDialogOpen) {
-            const {config,} = gameState as GameConfigState;
-
             return (
                 <Dialog open={isConfigDialogOpen} aria-labelledby="game-config-dialog">
                     <DialogTitle id="game-config-dialog">Game Configuration</DialogTitle>
@@ -97,7 +97,7 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
 }
 
 const App: React.FC = () => {
-    const gameState = useSelector((state: AppState) => state.game);
+    const gameState: GameState = useSelector((state: AppState) => state.game);
 
     return (
         <div className="App">

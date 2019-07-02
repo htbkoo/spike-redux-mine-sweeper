@@ -15,11 +15,20 @@ describe('gameReducer', function () {
 
         // then
         return expect(store.getState()).toEqual({
-            status: GameStatus.CONFIG,
             config: {
                 h: 8,
                 w: 8,
                 numBomb: 6
+            },
+            board: Board.ZERO_SIZE_BOARD,
+            // todo: migrate size meta to Board
+            meta: {
+                isDialogOpen: true,
+                numBomb: 6,
+                size: {
+                    h: 8,
+                    w: 6
+                }
             }
         });
     });
@@ -28,34 +37,25 @@ describe('gameReducer', function () {
         {
             config: {field: "h", newValue: 20},
             expected: {
-                status: GameStatus.CONFIG,
-                config: {
-                    h: 20,
-                    w: 8,
-                    numBomb: 6
-                }
+                h: 20,
+                w: 8,
+                numBomb: 6
             }
         },
         {
             config: {field: "w", newValue: 30},
             expected: {
-                status: GameStatus.CONFIG,
-                config: {
-                    h: 8,
-                    w: 30,
-                    numBomb: 6
-                }
+                h: 8,
+                w: 30,
+                numBomb: 6
             }
         },
         {
             config: {field: "numBomb", newValue: 10},
             expected: {
-                status: GameStatus.CONFIG,
-                config: {
-                    h: 8,
-                    w: 8,
-                    numBomb: 10
-                }
+                h: 8,
+                w: 8,
+                numBomb: 10
             }
         },
     ].forEach(({config, expected}) => {
@@ -67,7 +67,7 @@ describe('gameReducer', function () {
             store.dispatch(updateConfig(config as any));
 
             // then
-            return expect(store.getState()).toEqual(expected);
+            return expect(store.getState().config).toEqual(expected);
         });
     });
 
@@ -78,22 +78,20 @@ describe('gameReducer', function () {
         // when
         store.dispatch(createEmptyBoard({
             config: {
-                h: 6,
-                w: 8,
-                numBomb: 10
+                h: 50,
+                w: 40,
+                numBomb: 100
             },
         }));
 
         // then
-        return expect(store.getState()).toEqual({
-            "status": GameStatus.PRE_START,
-            "meta": {
-                "size": {
-                    "h": 6,
-                    "w": 8,
-                },
-                "numBomb": 10
+        return expect(store.getState().meta).toEqual({
+            "size": {
+                "h": 50,
+                "w": 40,
             },
+            "numBomb": 100,
+            isDialogOpen: true
         });
     });
 
@@ -102,7 +100,6 @@ describe('gameReducer', function () {
         const store = createStore(
             {
                 preloadedState: {
-                    "status": GameStatus.PRE_START,
                     "meta": {
                         "size": {
                             "h": 6,

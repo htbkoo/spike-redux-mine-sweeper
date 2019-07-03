@@ -1,5 +1,5 @@
 import {newBoard} from "./Board";
-import {Cell} from "./Cell";
+import {Cells} from "./Cell";
 
 describe('Board', function () {
     it('should create blank board', () => {
@@ -10,8 +10,8 @@ describe('Board', function () {
         // then
         return expect(board).toEqual({
             cells: [
-                [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
-                [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
+                [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
+                [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
             ],
             meta: {size: {h: 2, w: 4}, numBomb: 0}
         });
@@ -25,8 +25,8 @@ describe('Board', function () {
         // then
         return expect(board).toEqual({
             cells: [
-                [Cell.MINE, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
-                [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.MINE, Cell.MINE,],
+                [Cells.MINE, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
+                [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.MINE, Cells.MINE,],
             ],
             meta: {size: {h: 2, w: 5}, numBomb: 3}
         });

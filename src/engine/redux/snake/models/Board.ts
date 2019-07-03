@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import {Cell} from "./Cell";
+import {Cell, Cells} from "./Cell";
 
 export type Board = Readonly<{
     cells: Cell[][],
@@ -39,7 +39,7 @@ export function newBoardFromCells({cells}: { cells: Cell[][] }): Board {
 export function newBoard({w, h, bombsIndices = []}: { w: number, h: number, bombsIndices?: Array<number> }): Board {
     const cells = _.range(0, h).map(r =>
         _.range(0, w).map(c =>
-            isMine(r, c) ? Cell.MINE : Cell.EMPTY
+            isMine(r, c) ? Cells.MINE : Cells.EMPTY
         )
     );
 

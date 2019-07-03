@@ -1,5 +1,5 @@
 import {RandomBoardFactory} from "./BoardFactory";
-import {Cell} from "../models/Cell";
+import {Cells} from "../models/Cell";
 
 describe('BoardFactory', function () {
     it('should create new board', () => {
@@ -19,8 +19,8 @@ describe('BoardFactory', function () {
         return expect(board).toEqual(
             {
                 cells: [
-                    [Cell.MINE, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
-                    [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.MINE, Cell.MINE,],
+                    [Cells.MINE, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
+                    [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.MINE, Cells.MINE,],
                 ],
                 meta: {size: {h: 2, w: 5}, numBomb: 3}
             }

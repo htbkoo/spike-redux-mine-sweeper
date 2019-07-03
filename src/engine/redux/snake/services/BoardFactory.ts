@@ -1,6 +1,6 @@
 import {GameConfig} from "../models/state";
 import {RandomIntegerSequenceGenerator, SequenceGenerator} from "./SequenceGenerator";
-import {Board} from "../models/Board";
+import {Board, newBoard} from "../models/Board";
 
 export interface BoardFactory {
     createBoard(config: GameConfig): Board
@@ -20,6 +20,6 @@ export class RandomBoardFactory implements BoardFactory {
     createBoard({w, h, numBomb}: GameConfig): Board {
         const bombsIndices = this.sequenceGenerator.generate({start: 0, end: h * w, length: numBomb});
 
-        return Board.newBoard({w, h, bombsIndices});
+        return newBoard({w, h, bombsIndices});
     }
 }

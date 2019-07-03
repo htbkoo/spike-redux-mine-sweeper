@@ -1,7 +1,8 @@
 import {createStore} from "redux";
-import {GameStatus} from "../models/state";
+
 import {rootReducer} from "../reducers/rootReducer";
 import {updateConfig} from "../actions/actionCreators";
+import {ZERO_SIZE_BOARD} from "../models/Board";
 
 describe('Mine Sweeper', function () {
     describe('Config State', () => {
@@ -13,11 +14,14 @@ describe('Mine Sweeper', function () {
             // then
             return expect(store.getState()).toEqual({
                 game: {
-                    status: GameStatus.CONFIG,
                     config: {
                         h: 8,
                         w: 8,
                         numBomb: 6
+                    },
+                    board: ZERO_SIZE_BOARD,
+                    meta: {
+                        isDialogOpen: true,
                     }
                 }
             });
@@ -31,15 +35,10 @@ describe('Mine Sweeper', function () {
             store.dispatch(updateConfig({field: "h", newValue: 20}));
 
             // then
-            return expect(store.getState()).toEqual({
-                game: {
-                    status: GameStatus.CONFIG,
-                    config: {
-                        h: 20,
-                        w: 8,
-                        numBomb: 6
-                    }
-                }
+            return expect(store.getState().game.config).toEqual({
+                h: 20,
+                w: 8,
+                numBomb: 6
             });
         });
     });

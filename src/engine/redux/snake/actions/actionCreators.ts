@@ -9,12 +9,16 @@ export type UpdatedConfig = {
 };
 
 export const updateConfig = createStandardAction('UPDATE_CONFIG')
-    .map(({field, newValue}: UpdatedConfig) => ({payload: {field, newValue}}));
+    .map(({field, newValue}: UpdatedConfig) =>
+        ({payload: {field, newValue}})
+    );
 
 export const createEmptyBoard = createStandardAction('CREATE_EMPTY_BOARD')
-    .map(({config}: { config: GameConfig, }) => ({payload: {config}}));
+    .map(({config}: { config: GameConfig, }) =>
+        ({payload: {config}})
+    );
 
 export const startGame = createStandardAction('START_GAME')
-    .map(({config, boardFactory = RandomBoardFactory.DEFAULT}: { config: GameConfig, boardFactory?: BoardFactory }) => ({
-        payload: {board: boardFactory.createBoard(config), config}
-    }));
+    .map(({config, boardFactory = RandomBoardFactory.DEFAULT}: { config: GameConfig, boardFactory?: BoardFactory }) =>
+        ({payload: {board: boardFactory.createBoard(config), config}})
+    );

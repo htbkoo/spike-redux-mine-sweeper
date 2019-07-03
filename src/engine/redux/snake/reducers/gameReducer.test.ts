@@ -1,11 +1,11 @@
 import {configureStore, ConfigureStoreOptions} from 'redux-starter-kit';
 import {ActionType} from "typesafe-actions";
 
-import {GameState, GameStatus} from "../models/state";
+import {GameState} from "../models/state";
 import {gameReducer} from "./gameReducer";
 import * as gameActions from "../actions/actionCreators";
 import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
-import {Board} from "../models/Board";
+import {newBoardFromCells, ZERO_SIZE_BOARD} from "../models/Board";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {
@@ -20,15 +20,9 @@ describe('gameReducer', function () {
                 w: 8,
                 numBomb: 6
             },
-            board: Board.ZERO_SIZE_BOARD,
-            // todo: migrate size meta to Board
+            board: ZERO_SIZE_BOARD,
             meta: {
-                isDialogOpen: true,
-                numBomb: 6,
-                size: {
-                    h: 8,
-                    w: 6
-                }
+                isDialogOpen: true
             }
         });
     });
@@ -86,11 +80,6 @@ describe('gameReducer', function () {
 
         // then
         return expect(store.getState().meta).toEqual({
-            "size": {
-                "h": 50,
-                "w": 40,
-            },
-            "numBomb": 100,
             isDialogOpen: true
         });
     });
@@ -99,18 +88,10 @@ describe('gameReducer', function () {
         // given
         const store = createStore(
             {
-                preloadedState: {
-                    "meta": {
-                        "size": {
-                            "h": 6,
-                            "w": 8,
-                        },
-                        "numBomb": 10
-                    },
-                }
+                preloadedState: {}
             }
         );
-        const MOCK_BOARD = Board.fromCells({cells: [[], [], [], [], []]});
+        const MOCK_BOARD = newBoardFromCells({cells: [[], [], [], [], []]});
 
         // when
         store.dispatch(startGame({
@@ -128,7 +109,6 @@ describe('gameReducer', function () {
 
         // then
         return expect(store.getState()).toEqual({
-            "status": GameStatus.PLAYING,
             "board": MOCK_BOARD,
             "meta": {
                 "size": {

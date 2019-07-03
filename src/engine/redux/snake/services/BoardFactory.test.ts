@@ -21,7 +21,8 @@ describe('BoardFactory', function () {
                 cells: [
                     [Cell.MINE, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.EMPTY,],
                     [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY, Cell.MINE, Cell.MINE,],
-                ]
+                ],
+                meta: {size: {h: 2, w: 5}, numBomb: 3}
             }
         );
     });

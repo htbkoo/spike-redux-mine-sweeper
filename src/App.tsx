@@ -97,12 +97,27 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     );
 }
 
+
+function DebugStateMessage({gameState}: { gameState: GameState, }) {
+    const debugStateAsString = isProdEnv() ? "" : JSON.stringify(gameState);
+
+    return (
+        <div>
+            {debugStateAsString}
+        </div>
+    );
+
+    function isProdEnv() {
+        return process.env.NODE_ENV === "production";
+    }
+}
+
 const App: React.FC = () => {
     const gameState: GameState = useSelector((state: AppState) => state.game);
 
     return (
         <div className="App">
-            {JSON.stringify(gameState)}
+            <DebugStateMessage gameState={gameState}/>
             <GameConfigDialog gameState={gameState}/>
         </div>
     );

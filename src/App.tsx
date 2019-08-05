@@ -14,7 +14,7 @@ import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
 
 import './App.css';
 
-function GameConfigField({config, field, id, label, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, dispatch: Dispatch }) {
+function GameConfigField({config, field, id, label, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, dispatch: Dispatch, }) {
     return (
         <TextField
             autoFocus
@@ -25,6 +25,7 @@ function GameConfigField({config, field, id, label, dispatch}: { config: GameCon
             margin="normal"
             variant="outlined"
             type="number"
+            InputProps={{inputProps: {min: 1}}}
             onChange={updateIfValid}
         />
     );

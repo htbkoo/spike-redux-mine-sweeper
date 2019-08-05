@@ -96,6 +96,13 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     );
 }
 
+function GameBoard() {
+    return (
+        <div>
+        </div>
+    );
+}
+
 const App: React.FC = () => {
     const gameState: GameState = useSelector((state: AppState) => state.game);
 
@@ -103,6 +110,7 @@ const App: React.FC = () => {
         <div className="App">
             {JSON.stringify(gameState)}
             <GameConfigDialog gameState={gameState}/>
+            <GameBoard/>
         </div>
     );
 };

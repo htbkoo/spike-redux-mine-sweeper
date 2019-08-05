@@ -14,7 +14,7 @@ import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
 
 import './App.css';
 
-function GameConfigField({config, field, id, label, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, dispatch: Dispatch, }) {
+function GameConfigField({config, field, id, label, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, dispatch: Dispatch }) {
     return (
         <TextField
             autoFocus
@@ -35,6 +35,20 @@ function GameConfigField({config, field, id, label, dispatch}: { config: GameCon
         if (Number.isInteger(newValue)) {
             return dispatch(updateConfig({field, newValue}));
         }
+    }
+}
+
+function DebugStateMessage({gameState}: { gameState: GameState, }) {
+    const debugStateAsString = isProdEnv() ? "" : JSON.stringify(gameState);
+
+    return (
+        <div>
+            {debugStateAsString}
+        </div>
+    );
+
+    function isProdEnv() {
+        return process.env.NODE_ENV === "production";
     }
 }
 
@@ -97,19 +111,11 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     );
 }
 
-
-function DebugStateMessage({gameState}: { gameState: GameState, }) {
-    const debugStateAsString = isProdEnv() ? "" : JSON.stringify(gameState);
-
+function GameBoard() {
     return (
         <div>
-            {debugStateAsString}
         </div>
     );
-
-    function isProdEnv() {
-        return process.env.NODE_ENV === "production";
-    }
 }
 
 const App: React.FC = () => {
@@ -119,6 +125,7 @@ const App: React.FC = () => {
         <div className="App">
             <DebugStateMessage gameState={gameState}/>
             <GameConfigDialog gameState={gameState}/>
+            <GameBoard/>
         </div>
     );
 };

@@ -125,9 +125,31 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     );
 }
 
-function GameBoard() {
+function GameBoard({gameState}: { gameState: GameState, }) {
+    const cells = gameState.board.cells.map(row => (
+        <tr>
+            {
+                row.map(cell => (
+                    <td>
+                        <div>
+                            <button>
+
+                            </button>
+                        </div>
+                    </td>
+                    )
+                )
+            }
+        </tr>
+    ));
+
     return (
         <div>
+            <table>
+                <tbody>
+                {cells}
+                </tbody>
+            </table>
         </div>
     );
 }
@@ -139,7 +161,7 @@ const App: React.FC = () => {
         <div className="App">
             <DebugStateMessage gameState={gameState}/>
             <GameConfigDialog gameState={gameState}/>
-            <GameBoard/>
+            <GameBoard gameState={gameState}/>
         </div>
     );
 };

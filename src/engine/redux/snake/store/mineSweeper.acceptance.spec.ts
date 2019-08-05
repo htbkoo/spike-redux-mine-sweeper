@@ -1,7 +1,7 @@
 import {createStore} from "redux";
 
 import {rootReducer} from "../reducers/rootReducer";
-import {updateConfig} from "../actions/actionCreators";
+import {updateConfig} from "../game/actions";
 import {ZERO_SIZE_BOARD} from "../models/Board";
 
 describe('Mine Sweeper', function () {

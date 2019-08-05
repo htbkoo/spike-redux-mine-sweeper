@@ -3,8 +3,8 @@ import {ActionType} from "typesafe-actions";
 
 import {GameState} from "../models/state";
 import {gameReducer} from "./gameReducer";
-import * as gameActions from "../actions/actionCreators";
-import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
+import * as gameActions from "../game/actions";
+import {createEmptyBoard, startGame, updateConfig} from "../game/actions";
 import {newBoardFromCells, ZERO_SIZE_BOARD} from "../models/Board";
 
 describe('gameReducer', function () {

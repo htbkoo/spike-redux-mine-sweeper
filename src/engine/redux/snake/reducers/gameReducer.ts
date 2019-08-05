@@ -2,7 +2,7 @@ import produce from "immer";
 import {createReducer} from 'typesafe-actions';
 
 import {GameState} from "../models/state";
-import {createEmptyBoard, startGame, updateConfig} from "../actions/actionCreators";
+import {createEmptyBoard, startGame, updateConfig} from "../game/actions";
 import {newBoard, ZERO_SIZE_BOARD} from "../models/Board";
 
 const EMPTY_STATE: GameState = {

@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core";
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {AppState, GameConfig, GameState} from "./engine/redux/snake/models/state";
@@ -125,7 +126,22 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     );
 }
 
-function GameBoard({gameState}: { gameState: GameState, }) {
+const styles = ({palette, spacing}: Theme) => createStyles({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        // padding: spacing, // TODO: investigate
+        backgroundColor: palette.background.default,
+        color: palette.primary.main,
+    },
+    gameBoardContainer: {"display": "flex", "justifyContent": "center", "height": "100%", "marginTop": "10%"}
+});
+
+interface GameBoardProps extends WithStyles<typeof styles> {
+    gameState: GameState,
+}
+
+const GameBoard = withStyles(styles)(({gameState, classes}: GameBoardProps) => {
     const cells = gameState.board.cells.map((row, rowIndex) => (
         <tr key={`board-row-${rowIndex}`}>
             {
@@ -144,7 +160,7 @@ function GameBoard({gameState}: { gameState: GameState, }) {
     ));
 
     return (
-        <div>
+        <div className={classes.gameBoardContainer}>
             <table>
                 <tbody>
                 {cells}
@@ -152,7 +168,7 @@ function GameBoard({gameState}: { gameState: GameState, }) {
             </table>
         </div>
     );
-}
+});
 
 const App: React.FC = () => {
     const gameState: GameState = useSelector((state: AppState) => state.game);

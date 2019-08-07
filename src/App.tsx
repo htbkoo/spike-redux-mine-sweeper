@@ -11,10 +11,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {AppState, GameConfig, GameState} from "./engine/redux/snake/models/state";
 import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
-
-import './App.css';
 import GameBoard from "./components/GameBoard";
 import DebugStateMessage from "./components/DebugStateMessage";
+
+import './App.css';
 
 type FieldNumberRange = { min: number, max: number };
 

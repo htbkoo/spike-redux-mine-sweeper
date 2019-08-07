@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core";
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {AppState, GameConfig, GameState} from "./engine/redux/snake/models/state";
@@ -14,7 +15,9 @@ import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
 
 import './App.css';
 
-function GameConfigField({config, field, id, label, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, dispatch: Dispatch }) {
+type FieldNumberRange = { min: number, max: number };
+
+function GameConfigField({config, field, id, label, range: {min, max}, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, range: FieldNumberRange, dispatch: Dispatch }) {
     return (
         <TextField
             autoFocus
@@ -25,6 +28,7 @@ function GameConfigField({config, field, id, label, dispatch}: { config: GameCon
             margin="normal"
             variant="outlined"
             type="number"
+            InputProps={{inputProps: {min, max}}}
             onChange={updateIfValid}
         />
     );
@@ -37,7 +41,22 @@ function GameConfigField({config, field, id, label, dispatch}: { config: GameCon
     }
 }
 
+function DebugStateMessage({gameState}: { gameState: GameState, }) {
+    const debugStateAsString = isProdEnv() ? "" : JSON.stringify(gameState);
+
+    return (
+        <div>
+            {debugStateAsString}
+        </div>
+    );
+
+    function isProdEnv() {
+        return process.env.NODE_ENV === "production";
+    }
+}
+
 //(updated: UpdatedConfig) => void
+const BOARD_SIZE_RANGE = {min: 6, max: 25};
 
 function GameConfigDialog({gameState}: { gameState: GameState, }) {
     const {config, meta} = gameState;
@@ -58,6 +77,7 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
                             label="Width"
                             config={config}
                             field="w"
+                            range={BOARD_SIZE_RANGE}
                             dispatch={dispatch}
                         />
                         <GameConfigField
@@ -65,6 +85,7 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
                             label="height"
                             config={config}
                             field="h"
+                            range={BOARD_SIZE_RANGE}
                             dispatch={dispatch}
                         />
                         <GameConfigField
@@ -72,6 +93,7 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
                             label="Number of Bombs"
                             config={config}
                             field="numBomb"
+                            range={getNumBombsRange()}
                             dispatch={dispatch}
                         />
                     </DialogContent>
@@ -88,6 +110,14 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
         }
     }
 
+    const MAX_BOMB_PERCENTAGE = 0.3;
+
+    function getNumBombsRange() {
+        const min = 1;
+        const max = Math.round(config.h * config.w * MAX_BOMB_PERCENTAGE);
+
+        return {min, max};
+    }
 
     return (
         <div>
@@ -96,13 +126,58 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     );
 }
 
+const styles = ({palette, spacing}: Theme) => createStyles({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        // padding: spacing, // TODO: investigate
+        backgroundColor: palette.background.default,
+        color: palette.primary.main,
+    },
+    gameBoardContainer: {"display": "flex", "justifyContent": "center", "height": "100%", "marginTop": "10%"}
+});
+
+interface GameBoardProps extends WithStyles<typeof styles> {
+    gameState: GameState,
+}
+
+const GameBoard = withStyles(styles)(({gameState, classes}: GameBoardProps) => {
+    const cells = gameState.board.cells.map((row, rowIndex) => (
+        <tr key={`board-row-${rowIndex}`}>
+            {
+                row.map((cell, columnIndex) => (
+                        <td key={`board-column-${columnIndex}`}>
+                            <div>
+                                <button>
+
+                                </button>
+                            </div>
+                        </td>
+                    )
+                )
+            }
+        </tr>
+    ));
+
+    return (
+        <div className={classes.gameBoardContainer}>
+            <table>
+                <tbody>
+                {cells}
+                </tbody>
+            </table>
+        </div>
+    );
+});
+
 const App: React.FC = () => {
     const gameState: GameState = useSelector((state: AppState) => state.game);
 
     return (
         <div className="App">
-            {JSON.stringify(gameState)}
+            <DebugStateMessage gameState={gameState}/>
             <GameConfigDialog gameState={gameState}/>
+            <GameBoard gameState={gameState}/>
         </div>
     );
 };

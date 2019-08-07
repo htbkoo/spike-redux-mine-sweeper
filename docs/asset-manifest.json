@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/spike-redux-mine-sweeper/static/css/main.697e29ad.chunk.css",
+    "main.js": "/spike-redux-mine-sweeper/static/js/main.5c7f8961.chunk.js",
+    "main.js.map": "/spike-redux-mine-sweeper/static/js/main.5c7f8961.chunk.js.map",
+    "runtime~main.js": "/spike-redux-mine-sweeper/static/js/runtime~main.45b1143f.js",
+    "runtime~main.js.map": "/spike-redux-mine-sweeper/static/js/runtime~main.45b1143f.js.map",
+    "static/js/2.aa96c7e4.chunk.js": "/spike-redux-mine-sweeper/static/js/2.aa96c7e4.chunk.js",
+    "static/js/2.aa96c7e4.chunk.js.map": "/spike-redux-mine-sweeper/static/js/2.aa96c7e4.chunk.js.map",
+    "index.html": "/spike-redux-mine-sweeper/index.html",
+    "precache-manifest.e448b8a259af7687750a20629a291aba.js": "/spike-redux-mine-sweeper/precache-manifest.e448b8a259af7687750a20629a291aba.js",
+    "service-worker.js": "/spike-redux-mine-sweeper/service-worker.js",
+    "static/css/main.697e29ad.chunk.css.map": "/spike-redux-mine-sweeper/static/css/main.697e29ad.chunk.css.map"
+  }
+}

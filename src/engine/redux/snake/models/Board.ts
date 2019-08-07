@@ -5,34 +5,25 @@ import {Cell, Cells} from "./Cell";
 export type Board = Readonly<{
     cells: Cell[][],
     meta: Readonly<{
-        "size": BoardSize,
         "numBomb": number,
     }>
 }>
 
-type BoardSize = Readonly<{
-    "w": number,
-    "h": number
-}>
-
-export const ZERO_SIZE_BOARD: Board = Object.freeze({
-    cells: [],
-    meta: {
-        size: {
-            w: 0,
-            h: 0,
-        },
-        numBomb: 0
-    }
-});
+export const DEFAULT_BOARD: Board = Object.freeze(newEmptyBoard({w: 8, h: 8, numBomb: 6}));
 
 export function newBoardFromCells({cells}: { cells: Cell[][] }): Board {
     return {
         cells,
         meta: {
-            size: extractSize(cells),
             numBomb: 0
         }
+    };
+}
+
+export function newEmptyBoard({w, h, numBomb}: { w: number, h: number, numBomb: number }): Board {
+    return {
+        cells: _.range(0, h).map(() => _.range(0, w).map(() => Cells.EMPTY)),
+        meta: {numBomb}
     };
 }
 
@@ -51,14 +42,7 @@ export function newBoard({w, h, bombsIndices = []}: { w: number, h: number, bomb
     return {
         cells,
         meta: {
-            size: {w, h},
             numBomb: bombsIndices.length
         }
     };
-}
-
-function extractSize(cells: Cell[][]): BoardSize {
-    const h = cells.length;
-    const w = h > 0 ? cells[0].length : 0;
-    return {w, h,};
 }

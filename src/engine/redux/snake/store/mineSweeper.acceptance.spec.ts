@@ -2,7 +2,7 @@ import {createStore} from "redux";
 
 import {rootReducer} from "../reducers/rootReducer";
 import {updateConfig} from "../game/actions";
-import {ZERO_SIZE_BOARD} from "../models/Board";
+import {DEFAULT_BOARD} from "../models/Board";
 
 describe('Mine Sweeper', function () {
     describe('Config State', () => {
@@ -19,7 +19,7 @@ describe('Mine Sweeper', function () {
                         w: 8,
                         numBomb: 6
                     },
-                    board: ZERO_SIZE_BOARD,
+                    board: DEFAULT_BOARD,
                     meta: {
                         isDialogOpen: true,
                     }

@@ -126,17 +126,17 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
 }
 
 function GameBoard({gameState}: { gameState: GameState, }) {
-    const cells = gameState.board.cells.map(row => (
-        <tr>
+    const cells = gameState.board.cells.map((row, rowIndex) => (
+        <tr key={`board-row-${rowIndex}`}>
             {
-                row.map(cell => (
-                    <td>
-                        <div>
-                            <button>
+                row.map((cell, columnIndex) => (
+                        <td key={`board-column-${columnIndex}`}>
+                            <div>
+                                <button>
 
-                            </button>
-                        </div>
-                    </td>
+                                </button>
+                            </div>
+                        </td>
                     )
                 )
             }

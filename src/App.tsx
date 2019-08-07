@@ -7,13 +7,13 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import {createStyles, Paper, Theme, withStyles, WithStyles} from "@material-ui/core";
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {AppState, GameConfig, GameState} from "./engine/redux/snake/models/state";
 import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
 
 import './App.css';
+import GameBoard from "./components/GameBoard";
 
 type FieldNumberRange = { min: number, max: number };
 
@@ -125,52 +125,6 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
         </div>
     );
 }
-
-const styles = ({palette, spacing}: Theme) => createStyles({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        padding: spacing(), // TODO: investigate
-        backgroundColor: palette.background.default,
-        color: palette.primary.main,
-    },
-    gameBoardContainer: {"display": "flex", "justifyContent": "center", "height": "100%", marginTop: spacing(16)},
-    gameBoardCell: {"width": "64px", "height": "64px", margin: spacing(0.5)}
-});
-
-interface GameBoardProps extends WithStyles<typeof styles> {
-    gameState: GameState,
-}
-
-const GameBoard = withStyles(styles)(({gameState, classes}: GameBoardProps) => {
-    const cells = gameState.board.cells.map((row, rowIndex) => (
-        <tr key={`board-row-${rowIndex}`}>
-            {
-                row.map((cell, columnIndex) => (
-                        <td key={`board-column-${columnIndex}`}>
-                            <div>
-                                <Button variant="contained" className={classes.gameBoardCell}>
-                                </Button>
-                            </div>
-                        </td>
-                    )
-                )
-            }
-        </tr>
-    ));
-
-    return (
-        <div className={classes.gameBoardContainer}>
-            <Paper>
-                <table>
-                    <tbody>
-                    {cells}
-                    </tbody>
-                </table>
-            </Paper>
-        </div>
-    );
-});
 
 const App: React.FC = () => {
     const gameState: GameState = useSelector((state: AppState) => state.game);

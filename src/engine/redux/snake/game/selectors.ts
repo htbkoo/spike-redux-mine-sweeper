@@ -2,6 +2,6 @@
 // import { createSelector } from 'reselect';
 
 // import { TodosState } from './reducer';
-import {GameState} from "../models/state";
+import {AppState, GameState} from "../models/state";
 
-export const getTodos = (state: GameState) => state.meta;
+export const getGameState = (state: AppState) => state.game;

@@ -12,7 +12,6 @@ const EMPTY_STATE: GameState = {
         numBomb: 6
     },
     board: DEFAULT_BOARD,
-    // todo: migrate size meta to Board
     meta: {
         isDialogOpen: true,
     }

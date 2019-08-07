@@ -134,7 +134,8 @@ const styles = ({palette, spacing}: Theme) => createStyles({
         backgroundColor: palette.background.default,
         color: palette.primary.main,
     },
-    gameBoardContainer: {"display": "flex", "justifyContent": "center", "height": "100%", "marginTop": "10%"}
+    gameBoardContainer: {"display": "flex", "justifyContent": "center", "height": "100%", "marginTop": "10%"},
+    gameBoardCell: {"width": "64px", "height": "64px"}
 });
 
 interface GameBoardProps extends WithStyles<typeof styles> {
@@ -148,7 +149,7 @@ const GameBoard = withStyles(styles)(({gameState, classes}: GameBoardProps) => {
                 row.map((cell, columnIndex) => (
                         <td key={`board-column-${columnIndex}`}>
                             <div>
-                                <button>
+                                <button className={classes.gameBoardCell}>
 
                                 </button>
                             </div>

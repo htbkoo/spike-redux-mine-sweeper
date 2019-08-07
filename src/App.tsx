@@ -1,46 +1,19 @@
-import React, {ChangeEvent} from 'react';
-import {Dispatch} from "redux";
+import React from 'react';
 import {useDispatch, useSelector,} from "react-redux";
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import {AppState, GameConfig, GameState} from "./engine/redux/snake/models/state";
-import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
+import {AppState, GameState} from "./engine/redux/snake/models/state";
+import {startGame} from "./engine/redux/snake/game/actions";
 import GameBoard from "./components/GameBoard";
 import DebugStateMessage from "./components/DebugStateMessage";
+import GameConfigField from "./components/GameConfigField";
 
 import './App.css';
-
-type FieldNumberRange = { min: number, max: number };
-
-function GameConfigField({config, field, id, label, range: {min, max}, dispatch}: { config: GameConfig, field: keyof GameConfig, id: string, label: string, range: FieldNumberRange, dispatch: Dispatch }) {
-    return (
-        <TextField
-            autoFocus
-            id={id}
-            label={label}
-            fullWidth
-            value={config[field]}
-            margin="normal"
-            variant="outlined"
-            type="number"
-            InputProps={{inputProps: {min, max}}}
-            onChange={updateIfValid}
-        />
-    );
-
-    function updateIfValid(event: ChangeEvent<HTMLInputElement>) {
-        const newValue = parseInt(event.target.value);
-        if (Number.isInteger(newValue)) {
-            return dispatch(updateConfig({field, newValue}));
-        }
-    }
-}
 
 //(updated: UpdatedConfig) => void
 const BOARD_SIZE_RANGE = {min: 6, max: 25};

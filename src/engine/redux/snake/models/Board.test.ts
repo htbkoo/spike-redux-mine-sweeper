@@ -13,7 +13,7 @@ describe('Board', function () {
                 [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
                 [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
             ],
-            meta: {size: {h: 2, w: 4}, numBomb: 0}
+            meta: {numBomb: 0}
         });
     });
 
@@ -28,7 +28,7 @@ describe('Board', function () {
                 [Cells.MINE, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.EMPTY,],
                 [Cells.EMPTY, Cells.EMPTY, Cells.EMPTY, Cells.MINE, Cells.MINE,],
             ],
-            meta: {size: {h: 2, w: 5}, numBomb: 3}
+            meta: {numBomb: 3}
         });
     });
 });

@@ -9,7 +9,7 @@ export type Board = Readonly<{
     }>
 }>
 
-export const ZERO_SIZE_BOARD: Board = Object.freeze({
+export const DEFAULT_BOARD: Board = Object.freeze({
     cells: _.range(0, 8).map(() => _.range(0, 8).map(() => Cells.EMPTY)),
     meta: {
         numBomb: 6

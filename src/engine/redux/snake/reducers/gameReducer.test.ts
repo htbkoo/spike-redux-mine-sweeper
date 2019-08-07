@@ -5,7 +5,7 @@ import {GameState} from "../models/state";
 import {gameReducer} from "./gameReducer";
 import * as gameActions from "../game/actions";
 import {createEmptyBoard, startGame, updateConfig} from "../game/actions";
-import {newBoardFromCells, ZERO_SIZE_BOARD} from "../models/Board";
+import {newBoardFromCells, DEFAULT_BOARD} from "../models/Board";
 
 describe('gameReducer', function () {
     it('should create store for initial state', () => {
@@ -20,7 +20,7 @@ describe('gameReducer', function () {
                 w: 8,
                 numBomb: 6
             },
-            board: ZERO_SIZE_BOARD,
+            board: DEFAULT_BOARD,
             meta: {
                 isDialogOpen: true
             }

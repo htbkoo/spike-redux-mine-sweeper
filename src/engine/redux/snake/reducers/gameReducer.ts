@@ -3,7 +3,7 @@ import {createReducer} from 'typesafe-actions';
 
 import {GameState} from "../models/state";
 import {createEmptyBoard, startGame, updateConfig} from "../game/actions";
-import {newBoard, ZERO_SIZE_BOARD} from "../models/Board";
+import {newBoard, DEFAULT_BOARD} from "../models/Board";
 
 const EMPTY_STATE: GameState = {
     config: {
@@ -11,7 +11,7 @@ const EMPTY_STATE: GameState = {
         w: 8,
         numBomb: 6
     },
-    board: ZERO_SIZE_BOARD,
+    board: DEFAULT_BOARD,
     // todo: migrate size meta to Board
     meta: {
         isDialogOpen: true,

@@ -9,12 +9,7 @@ export type Board = Readonly<{
     }>
 }>
 
-export const DEFAULT_BOARD: Board = Object.freeze({
-    cells: _.range(0, 8).map(() => _.range(0, 8).map(() => Cells.EMPTY)),
-    meta: {
-        numBomb: 6
-    }
-});
+export const DEFAULT_BOARD: Board = Object.freeze(newEmptyBoard({w: 8, h: 8, numBomb: 6}));
 
 export function newBoardFromCells({cells}: { cells: Cell[][] }): Board {
     return {
@@ -22,6 +17,13 @@ export function newBoardFromCells({cells}: { cells: Cell[][] }): Board {
         meta: {
             numBomb: 0
         }
+    };
+}
+
+export function newEmptyBoard({w, h, numBomb}: { w: number, h: number, numBomb: number }): Board {
+    return {
+        cells: _.range(0, h).map(() => _.range(0, w).map(() => Cells.EMPTY)),
+        meta: {numBomb}
     };
 }
 

@@ -1,3 +1,4 @@
+// TODO: learn rxjs for real
 import {of, interval} from 'rxjs';
 import {catchError, map, take} from 'rxjs/operators';
 

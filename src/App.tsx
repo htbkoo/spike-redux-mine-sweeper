@@ -176,9 +176,9 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <DebugStateMessage gameState={gameState}/>
             <GameConfigDialog gameState={gameState}/>
             <GameBoard gameState={gameState}/>
+            <DebugStateMessage gameState={gameState}/>
         </div>
     );
 };

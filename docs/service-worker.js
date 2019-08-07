@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/spike-redux-mine-sweeper/precache-manifest.e448b8a259af7687750a20629a291aba.js"
+  "/spike-redux-mine-sweeper/precache-manifest.5b8b159f905a63aa29fe2c94d0139e2a.js"
 );
 
 self.addEventListener('message', (event) => {

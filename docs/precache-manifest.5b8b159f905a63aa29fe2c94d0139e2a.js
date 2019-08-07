@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "57bb2a58ef9f3bbafcb8a7817e04ac7b",
+    "revision": "b19a5bddae75b70ab2d920851f9f8ab9",
     "url": "/spike-redux-mine-sweeper/index.html"
   },
   {
-    "revision": "c412aca3953e98ec2af4",
+    "revision": "8f61017efc37b5590521",
     "url": "/spike-redux-mine-sweeper/static/css/main.697e29ad.chunk.css"
   },
   {
-    "revision": "0ecd83eebc04e76adf5c",
-    "url": "/spike-redux-mine-sweeper/static/js/2.aa96c7e4.chunk.js"
+    "revision": "eb750eb23967025d467f",
+    "url": "/spike-redux-mine-sweeper/static/js/2.31a1da3f.chunk.js"
   },
   {
-    "revision": "c412aca3953e98ec2af4",
-    "url": "/spike-redux-mine-sweeper/static/js/main.5c7f8961.chunk.js"
+    "revision": "8f61017efc37b5590521",
+    "url": "/spike-redux-mine-sweeper/static/js/main.dedee412.chunk.js"
   },
   {
     "revision": "3dd10cf1b378d06bf195",

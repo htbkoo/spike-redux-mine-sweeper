@@ -14,6 +14,7 @@ import {startGame, updateConfig} from "./engine/redux/snake/game/actions";
 
 import './App.css';
 import GameBoard from "./components/GameBoard";
+import DebugStateMessage from "./components/DebugStateMessage";
 
 type FieldNumberRange = { min: number, max: number };
 
@@ -38,20 +39,6 @@ function GameConfigField({config, field, id, label, range: {min, max}, dispatch}
         if (Number.isInteger(newValue)) {
             return dispatch(updateConfig({field, newValue}));
         }
-    }
-}
-
-function DebugStateMessage({gameState}: { gameState: GameState, }) {
-    const debugStateAsString = isProdEnv() ? "" : JSON.stringify(gameState);
-
-    return (
-        <div>
-            {debugStateAsString}
-        </div>
-    );
-
-    function isProdEnv() {
-        return process.env.NODE_ENV === "production";
     }
 }
 

@@ -112,7 +112,7 @@ function GameConfigDialog({gameState}: { gameState: GameState, }) {
     const MAX_BOMB_PERCENTAGE = 0.3;
 
     function getNumBombsRange() {
-        const min = 0;
+        const min = 1;
         const max = Math.round(config.h * config.w * MAX_BOMB_PERCENTAGE);
 
         return {min, max};

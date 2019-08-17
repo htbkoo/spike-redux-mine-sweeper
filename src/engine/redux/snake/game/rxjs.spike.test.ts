@@ -17,10 +17,17 @@ describe("spike", function () {
         //gracefully handle error, returning observable with error message
         const example = source.pipe(catchError(val => of(`I caught: ${val}`)));
         //output: 'I caught: This is an error'
-        const subscribe = example.subscribe(val => console.log(val));
+        // const subscribe = source.subscribe(val => console.log(val));
 
-        inter.pipe(take(30)).subscribe(val=>console.log(val));
-
-        return new Promise(resolve => setTimeout(resolve, 2000));
+        // inter.pipe(take(30)).subscribe(val=>console.log(val));
+        return new Promise(resolve =>
+            inter.pipe(
+                // take(30)
+            )
+                .subscribe({
+                    next: console.log,
+                    complete: resolve
+                })
+        );
     });
 });

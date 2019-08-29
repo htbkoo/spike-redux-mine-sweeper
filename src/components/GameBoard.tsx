@@ -28,6 +28,7 @@ const GameBoard = withStyles(styles)(({gameState, classes}: GameBoardProps) => {
                         <td key={`board-column-${columnIndex}`}>
                             <div>
                                 <Button variant="contained" className={classes.gameBoardCell}>
+                                    <div/>
                                 </Button>
                             </div>
                         </td>

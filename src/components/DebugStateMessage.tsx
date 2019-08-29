@@ -1,7 +1,7 @@
 import React from "react";
 import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core";
 
-import {GameState} from "../engine/redux/snake/models/state";
+import {GameState} from "../engine/redux/minesweeper/models/state";
 
 const styles = ({spacing}: Theme) => createStyles({
     alwaysBottom: {

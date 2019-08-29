@@ -8,8 +8,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
 import GameConfigField from "./GameConfigDialog";
-import {GameState} from "../engine/redux/snake/models/state";
-import {startGame} from "../engine/redux/snake/game/actions";
+import {GameState} from "../engine/redux/minesweeper/models/state";
+import {startGame} from "../engine/redux/minesweeper/game/actions";
 
 //(updated: UpdatedConfig) => void
 const BOARD_SIZE_RANGE = {min: 6, max: 25};

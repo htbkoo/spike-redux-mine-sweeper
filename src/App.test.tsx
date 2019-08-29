@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {Provider} from "react-redux";
 import {configureStore} from "redux-starter-kit";
-import {rootReducer} from "./engine/redux/snake/reducers/rootReducer";
+import {rootReducer} from "./engine/redux/minesweeper/reducers/rootReducer";
 
 it('renders without crashing', () => {
     const div = document.createElement('div');

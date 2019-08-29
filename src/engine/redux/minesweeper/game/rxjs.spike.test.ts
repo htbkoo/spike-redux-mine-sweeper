@@ -22,7 +22,7 @@ describe("spike", function () {
         // inter.pipe(take(30)).subscribe(val=>console.log(val));
         return new Promise(resolve =>
             inter.pipe(
-                // take(30)
+                take(30)
             )
                 .subscribe({
                     next: console.log,

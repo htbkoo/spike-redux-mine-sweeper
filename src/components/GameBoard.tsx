@@ -2,7 +2,7 @@ import React from "react";
 import {createStyles, Paper, Theme, withStyles, WithStyles} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-import {GameState} from "../engine/redux/snake/models/state";
+import {GameState} from "../engine/redux/minesweeper/models/state";
 
 const styles = ({palette, spacing}: Theme) => createStyles({
     root: {
@@ -28,6 +28,7 @@ const GameBoard = withStyles(styles)(({gameState, classes}: GameBoardProps) => {
                         <td key={`board-column-${columnIndex}`}>
                             <div>
                                 <Button variant="contained" className={classes.gameBoardCell}>
+                                    <div/>
                                 </Button>
                             </div>
                         </td>

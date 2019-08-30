@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
-import {rootReducer} from "./engine/redux/snake/reducers/rootReducer";
+import {rootReducer} from "./engine/redux/minesweeper/reducers/rootReducer";
 import {configureStore} from "redux-starter-kit";
 
 import App from './App';

@@ -2,8 +2,8 @@ import React, {ChangeEvent} from "react";
 import {Dispatch} from "redux";
 import TextField from "@material-ui/core/TextField";
 
-import {GameConfig} from "../engine/redux/snake/models/state";
-import {updateConfig} from "../engine/redux/snake/game/actions";
+import {GameConfig} from "../engine/redux/minesweeper/models/state";
+import {updateConfig} from "../engine/redux/minesweeper/game/actions";
 
 type FieldNumberRange = { min: number, max: number };
 

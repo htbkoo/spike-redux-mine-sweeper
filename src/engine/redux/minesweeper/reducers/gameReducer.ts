@@ -3,7 +3,7 @@ import {createReducer} from 'typesafe-actions';
 
 import {GameState} from "../models/state";
 import {createEmptyBoard, startGame, updateConfig} from "../game/actions";
-import {newBoard, DEFAULT_BOARD, newEmptyBoard} from "../models/Board";
+import {DEFAULT_BOARD, newEmptyBoard} from "../models/Board";
 
 const EMPTY_STATE: GameState = {
     config: {
@@ -23,10 +23,9 @@ export const gameReducer = createReducer(EMPTY_STATE as GameState)
             draft.config[payload.field] = payload.newValue;
         })
     )
-    .handleAction(createEmptyBoard, (state, {payload}) =>
+    .handleAction(createEmptyBoard, (state, {payload: {config}}) =>
         produce(state, draft => {
-            draft.board = newBoard({h: payload.config.h, w: payload.config.w,});
-            // todo: utilize payload.config.numBomb;
+            draft.board = newEmptyBoard(config);
         })
     )
     .handleAction(startGame, (state, {payload: {config}}) =>

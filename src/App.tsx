@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector,} from "react-redux";
 
-import {AppState, GameState} from "./engine/redux/snake/models/state";
+import {AppState, GameState} from "./engine/redux/minesweeper/models/state";
 import GameBoard from "./components/GameBoard";
 import DebugStateMessage from "./components/DebugStateMessage";
 import GameConfigDialog from "./components/GameConfigField";
